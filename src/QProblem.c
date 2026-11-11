@@ -3285,7 +3285,8 @@ returnValue QProblem_computeProjectedCholesky( QProblem* _THIS )
 					DenseMatrix_getCol( _THIS->H, FR_idx[j], Bounds_getFree( _THIS->bounds ), 1.0, &(_THIS->R[j*nV]));
 			} else {
 				/* _THIS is expensive if Z is large! */
-				DenseMatrix_bilinear( _THIS->H, Bounds_getFree( _THIS->bounds ), nZ, _THIS->Q, nV, _THIS->R, nV);
+				if ( DenseMatrix_bilinear( _THIS->H, Bounds_getFree( _THIS->bounds ), nZ, _THIS->Q, nV, _THIS->R, nV ) != SUCCESSFUL_RETURN )
+					return THROWERROR( RET_INVALID_ARGUMENTS );
 			}
 	}
 

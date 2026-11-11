@@ -41,7 +41,8 @@ IFLAGS      =  -I. \
 
 QPOASES_TEST_EXES = \
 	${BINDIR}/test_bench${EXE} \
-	${BINDIR}/test_runAllOqpExamples${EXE}
+	${BINDIR}/test_runAllOqpExamples${EXE} \
+	${BINDIR}/test_bilinear_dimensions${EXE}
 
 QPOASES_DEPENDS = \
 	${IDIR}/qpOASES_e.h \

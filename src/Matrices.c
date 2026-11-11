@@ -590,6 +590,12 @@ returnValue DenseMatrix_bilinear(	DenseMatrix* _THIS,
 	myStatic real_t Ax[NVCMAX*NVMAX];
 	real_t h;
 
+	/* guard the fixed-size Ax buffer: without this check, a QP with
+	 * icols->length * xN > NVCMAX*NVMAX (e.g. more than QPOASES_NVMAX
+	 * free variables, as in full condensing with slacks) overflows Ax */
+	if ( icols->length * xN > NVCMAX*NVMAX )
+		return THROWERROR( RET_INVALID_ARGUMENTS );
+
 	for (ii = 0; ii < xN; ii++)
 		for (jj = 0; jj < xN; jj++)
 			y[ii*yLD+jj] = 0.0;
